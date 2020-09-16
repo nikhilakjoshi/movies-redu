@@ -1,26 +1,32 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import { getMovies } from "./actions/moviesAcion";
+import React from 'react'
+// import React, { useEffect } from 'react'
+// import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedMovie } from "./actions/moviesAcion";
 // import { List, ListItem, Container, ListItemText } from "@material-ui/core";
 import { red } from '@material-ui/core/colors';
 import moment from "moment";
+import "./css/clamp.css"
+import { useNavigate } from "react-router-dom";
 import { 
     Card,
     CardHeader,
     CardContent,
     CardMedia,
     makeStyles,
-    CardActions,
     Container,
     Typography,
-    Grid
+    Grid,
 } from "@material-ui/core";
 
+const imgBaseUrl = "http://image.tmdb.org/t/p/w780"
 
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
-        height: 450
+        height: 350,
+        backgroundColor: "#353533",
+        cursor: "pointer"
     },
     media: {
         height: 0,
@@ -44,46 +50,48 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Movies() {
-    const dispatch = useDispatch()
     const classes = useStyles();
     const movies = useSelector(state => state.movies.movies)
 
-    useEffect(() => {
-        dispatch(getMovies({
-            query: "Horror",
-            page: 1
-        }))
-    }, [])
 
     return (
-        <Container
-            maxWidth="md"
+        <Grid
+            container
+            spacing={2}
         >
-            <Grid
-                container
-                spacing={1}
-            >
-            {
-                movies.map(movie => (
-                    <Grid
-                        item
-                        md={4}
-                    >
-                        <MoviedCard
-                            classes={classes}
-                            movie={movie}
-                        />
-                    </Grid>
-                ))
-            }
-            </Grid>
-        </Container>
+        {
+            movies.map(movie => (
+                <Grid
+                    item
+                    md={4}
+                >
+                    <MoviedCard
+                        classes={classes}
+                        movie={movie}
+                    />
+                </Grid>
+            ))
+        }
+        </Grid>
+
     )
 }
 
 const MoviedCard = ({ movie, classes }) => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const setSelectedMov = () => {
+        dispatch(setSelectedMovie({
+            movie: movie
+        }))
+        navigate(`/movie/${movie.id}`)
+    }
+    
     return (
-        <Card className={classes.root}>
+        <Card 
+            className={classes.root}
+            onClick={setSelectedMov}
+        >
             <CardHeader
                 /* avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -95,16 +103,22 @@ const MoviedCard = ({ movie, classes }) => {
                         <MoreVertIcon />
                     </IconButton>
                 } */
+                className="clamp1"
                 title={movie.title}
                 subheader={moment(movie.release_date,"YYYY-MM-DD").format("MMMM Do YYYY")}
             />
             <CardMedia
                 className={classes.media}
-                // image="/static/images/cards/paella.jpg"
+                image={imgBaseUrl+movie.backdrop_path}
                 // title="Paella dish"
             />
             <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
+                <Typography 
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                    className="clamp9"
+                >
                     {movie.overview}
                 </Typography>
             </CardContent>
