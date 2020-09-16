@@ -9,7 +9,7 @@ import {
     SET_SELECTED_MOVIE_SUCCESS,
     SET_SELECTED_MOVIE
 } from "./../types";
-import { api_key } from "./key";
+import { api_key } from "./apikey";
 
 // const baseapiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&include_adult=false`
 const baseapiUrl = `https://api.themoviedb.org/3`
