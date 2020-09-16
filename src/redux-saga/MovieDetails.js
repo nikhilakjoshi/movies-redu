@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -12,7 +12,6 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
-import PerfectScrollBar from "react-perfect-scrollbar";
 
 const useStyles = makeStyles((theme) => {
     return {
@@ -130,6 +129,7 @@ const Hero = ({ movie }) => {
             <img 
                 className={classes.hero}
                 src={imgBaseUrl+movie.poster_path}
+                alt="Poster"
             />
             <Details movie={movie}/>
         </Box>

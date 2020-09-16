@@ -26,7 +26,7 @@ export default function SearchPage() {
             }))
         }
         
-    }, [dispatch])
+    }, [dispatch, srchTxt])
     
     const triggerSearch = (searchStr) => {
         

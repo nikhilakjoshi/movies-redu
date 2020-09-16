@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { 
-    Container,
     TextField,
     Box,
     InputAdornment,
@@ -54,7 +53,7 @@ export default function MovieSearch({ triggerSearch }) {
         if(srchTxt !== "") {
             setText(srchTxt)
         }
-    },[])
+    },[srchTxt])
     
     const classes = useStyles()
     
