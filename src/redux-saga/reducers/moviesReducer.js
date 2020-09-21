@@ -2,7 +2,8 @@ import {
     FETCH_MOVIES_FAILED,
     FETCH_MOVIES_SUCCESS,
     SET_SEARCH_SUCCESS,
-    SET_SELECTED_MOVIE_SUCCESS
+    SET_SELECTED_MOVIE_SUCCESS,
+    CLEAR_MOVIES_SUCCESS
 } from "./../types";
 
 const initialState = {
@@ -39,6 +40,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 srchTxt: action.srchTxt
+            }
+        }
+        case CLEAR_MOVIES_SUCCESS: {
+            return {
+                ...state,
+                movies: []
             }
         }
         default:{

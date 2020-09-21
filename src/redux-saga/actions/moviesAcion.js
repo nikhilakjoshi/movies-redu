@@ -1,4 +1,4 @@
-import { FETCH_MOVIES, SET_SEARCH, SET_SELECTED_MOVIE } from "./../types"
+import { FETCH_MOVIES, SET_SEARCH, SET_SELECTED_MOVIE,CLEAR_MOVIES } from "./../types"
 
 export function getMovies({ query, page, endpoint }) {
   return { 
@@ -18,5 +18,10 @@ export function setSearchParam({ string }) {
   return { 
     type: SET_SEARCH,
     string
+  }
+}
+export function clearMovies() {
+  return { 
+    type: CLEAR_MOVIES,
   }
 }

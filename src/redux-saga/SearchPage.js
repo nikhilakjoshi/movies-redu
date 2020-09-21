@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import MovieSearch from "./MovieSearch";
 import Movies from "./Movies";
-import { getMovies, setSearchParam } from "./actions/moviesAcion";
+import { getMovies, setSearchParam, clearMovies } from "./actions/moviesAcion";
 import { useDispatch, useSelector } from "react-redux";
 import { Container } from "@material-ui/core";
 
@@ -12,6 +12,7 @@ export default function SearchPage() {
     const srchTxt = useSelector(state => state.movies.srchTxt)
 
     useEffect(() => {
+        dispatch(clearMovies())
         if(srchTxt === "") {
             dispatch(getMovies({
                 query: "",

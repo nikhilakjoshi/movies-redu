@@ -12,21 +12,28 @@ import {
     Typography,
     makeStyles
 } from "@material-ui/core";
+import Image from "material-ui-image";
+// import { Skeleton } from "@material-ui/lab"
+import theme from "./../theme"
 
 const useStyles = makeStyles((theme) => {
     return {
         root:{},
         herobox: {
-            backgroundColor: "#353533"
+            backgroundColor: "#353533",
+            [theme.breakpoints.down('md')]: {
+                flexDirection: 'column'
+            }
         },
         hero: {
+            width: 300,
             height: 450,
             borderRadius: 15
         },
         gold: {
             color: "#FFD700",
             textShadow: "0px 0px 2px #FFD700"
-        }
+        },
     }
 })
 
@@ -126,10 +133,28 @@ const Hero = ({ movie }) => {
             borderRadius={15}
             className={classes.herobox}
             >
-            <img 
+            {/* <img 
                 className={classes.hero}
                 src={imgBaseUrl+movie.poster_path}
                 alt="Poster"
+            /> */}
+            <Image
+                // className={classes.hero}
+                color={theme.palette.background.card}
+                src={imgBaseUrl+movie.poster_path}
+                animationDuration={1500}
+                imageStyle={{
+                    width: 300,
+                    height: 450,
+                    borderRadius: 15,
+                    position: "relative"
+                }}
+                style={{
+                    paddingTop: 0,
+                }}
+                // onClick={() => console.log('onClick')}
+                // aspectRatio={(2/3)}
+                disableSpinner
             />
             <Details movie={movie}/>
         </Box>

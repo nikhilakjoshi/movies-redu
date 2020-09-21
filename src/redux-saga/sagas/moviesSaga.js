@@ -7,7 +7,9 @@ import {
     SET_SEARCH,
     SET_SEARCH_SUCCESS, 
     SET_SELECTED_MOVIE_SUCCESS,
-    SET_SELECTED_MOVIE
+    SET_SELECTED_MOVIE,
+    CLEAR_MOVIES,
+    CLEAR_MOVIES_SUCCESS
 } from "./../types";
 import { api_key } from "./apikey";
 
@@ -35,6 +37,9 @@ function* setSel(action) {
     console.log(action)
     yield put({ type: SET_SELECTED_MOVIE_SUCCESS, selectedMovie: action.movie })
 }
+function* clearMov(action) {
+    yield put({ type: CLEAR_MOVIES_SUCCESS})
+}
 
 function* moviesSaga() {
     yield takeEvery(FETCH_MOVIES, fetchMovies)
@@ -45,11 +50,15 @@ function* setSearch() {
 function* setSelected() {
     yield takeEvery( SET_SELECTED_MOVIE, setSel )
 }
+function* clearMovies() {
+    yield takeEvery( CLEAR_MOVIES, clearMov )
+}
 
 const moviesSagas =  {
     moviesSaga,
     setSearch,
-    setSelected
+    setSelected,
+    clearMovies
 }
 
 export default moviesSagas 
